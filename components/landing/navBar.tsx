@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import React from 'react';
 
 type Props = {};
@@ -12,10 +13,14 @@ function NavBar({}: Props) {
           <p>Pricing</p>
         </div>
         <div className="flex items-center gap-5">
-          <button className="bg-brand px-4 py-1 rounded-lg text-sm font-medium">
-            Sign up
-          </button>
-          <button className="text-sm font-medium opacity-50">Sign in</button>
+          <Link href={'/auth/signUp'}>
+            <button className="bg-brand px-4 py-1 rounded-lg text-sm font-medium">
+              Sign up
+            </button>
+          </Link>
+          <Link href={'/auth/signIn'}>
+            <button className="text-sm font-medium opacity-50">Sign in</button>
+          </Link>
         </div>
       </div>
     </>

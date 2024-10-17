@@ -57,7 +57,7 @@ function SignUp({ searchParams }: { searchParams: { message: string } }) {
             </Link>
           </div>
           {searchParams?.message && (
-            <p className="bg-3BG/20 text-textColor/50 mt-4 p-4 text-center">
+            <p className="text-textColor/50 text-center">
               {searchParams.message}
             </p>
           )}

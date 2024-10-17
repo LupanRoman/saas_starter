@@ -1,16 +1,17 @@
-'use server';
-import { createClient } from '@/utils/supabase/server';
-import { headers } from 'next/headers';
-import { redirect } from 'next/navigation';
+"use server";
+import { createClient } from "@/utils/supabase/server";
+import { headers } from "next/headers";
+import { redirect } from "next/navigation";
 
+// * Signing up the user with email and password
 export const signUpAction = async (formData: FormData) => {
-  const email = formData.get('email')?.toString();
-  const password = formData.get('password')?.toString();
+  const email = formData.get("email")?.toString();
+  const password = formData.get("password")?.toString();
   const supabase = createClient();
-  const origin = headers().get('origin');
+  const origin = headers().get("origin");
 
   if (!email || !password) {
-    return { error: 'Email and password are required' };
+    return { error: "Email and password are required" };
   }
 
   const { error } = await supabase.auth.signUp({
@@ -23,17 +24,18 @@ export const signUpAction = async (formData: FormData) => {
 
   if (error) {
     return redirect(
-      '/auth/signUp?message=Something went wrong, please try again'
+      "/auth/signUp?message=Something went wrong, please try again",
     );
   }
   return redirect(
-    '/auth/signUp?message=Thanks for signing up! Please check your email for a verification link.'
+    "/auth/signUp?message=Thanks for signing up! Please check your email for a verification link.",
   );
 };
 
+// * Signing in the user
 export const signInAction = async (formData: FormData) => {
-  const email = formData.get('email') as string;
-  const password = formData.get('password') as string;
+  const email = formData.get("email") as string;
+  const password = formData.get("password") as string;
   const supabase = createClient();
 
   const { error } = await supabase.auth.signInWithPassword({
@@ -42,25 +44,34 @@ export const signInAction = async (formData: FormData) => {
   });
 
   if (error) {
-    return redirect('/auth/signIn?message=Please try again');
+    return redirect("/auth/signIn?message=Please try again");
   }
 
-  return redirect('/protected');
+  return redirect("/protected");
 };
 
+// * Registering the user with a google account
 export const signInWithGoogle = async () => {
-  'use server';
-  const origin = headers().get('origin');
+  "use server";
+  const origin = headers().get("origin");
   const supabase = createClient();
 
   const { data, error } = await supabase.auth.signInWithOAuth({
-    provider: 'google',
+    provider: "google",
     options: {
       redirectTo: `${origin}/auth/callback`,
     },
   });
   redirect(data.url as string);
 };
+
+// * Signing out the user
+export const signOutAction = async () => {
+  const supabase = createClient();
+  await supabase.auth.signOut();
+  return redirect("/register");
+};
+
 
 // export const forgotPasswordAction = async (formData: FormData) => {
 //   const email = formData.get('email')?.toString();
@@ -126,9 +137,3 @@ export const signInWithGoogle = async () => {
 
 //   encodedRedirect('success', '/protected/reset-password', 'Password updated');
 // };
-
-export const signOutAction = async () => {
-  const supabase = createClient();
-  await supabase.auth.signOut();
-  return redirect('/register');
-};
