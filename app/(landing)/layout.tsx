@@ -13,14 +13,14 @@ export const metadata = {
 
 const inter = Inter({ subsets: ['latin'] });
 
-export default function RootLayout({
+export default function LandingLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return (
     <html lang="en" className={inter.className} suppressHydrationWarning>
-      <body>{children}</body>
+      <body className="bg-[#1B1B2B]">{children}</body>
     </html>
   );
 }
