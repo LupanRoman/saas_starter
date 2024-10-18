@@ -1,22 +1,24 @@
-import type { Config } from 'tailwindcss';
+import type { Config } from "tailwindcss";
 
 export default {
   content: [
-    './app/**/*.{js,ts,jsx,tsx,mdx}',
-    './components/**/*.{js,ts,jsx,tsx,mdx}',
-    './redux/**/*.{js,ts,jsx,tsx,mdx}',
+    "./app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./components/**/*.{js,ts,jsx,tsx,mdx}",
+    "./redux/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
+    borderRadius: {
+      none: "0",
+      sm: "5px",
+      md: "10px",
+      lg: "20px",
+      full: "9999px",
+    },
     extend: {
       colors: {
-        brand: '#3B4EF8',
-        fillColor: '#1B1B2B',
-        dimText: '#FFFFFF80',
-        inProgress: '#EBEBEB',
-        toTo: '#4665C9CC',
-        done: '#68C73D80',
-        boxColor: '#323140',
-        dimBoxColor: '#FFFFFF33',
+        brand: "#FDA04F",
+        gradientTop: "#E9BD9C",
+        gradientBottom: "#FFFFFF",
       },
     },
   },
